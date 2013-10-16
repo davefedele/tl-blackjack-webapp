@@ -8,6 +8,8 @@ get '/' do
 end
 
 post '/username' do
+  session[:username] = params[:username]
+  "hello #{session[:name]}"
   redirect '/welcome'
 end
 
