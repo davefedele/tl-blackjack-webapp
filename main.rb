@@ -5,7 +5,7 @@ set :sessions, true
 
 get '/' do
   if session[:username]
-    redirect '/welcome'
+    redirect '/game'
   else
     erb :username
   end
@@ -17,13 +17,9 @@ end
 
 post '/username' do
   session[:username] = params[:username]
-  redirect '/welcome'
-end
-
-get '/welcome' do
-  erb :welcome
+  redirect '/game'
 end
 
 get '/game' do
-  "game"
+  erb :game
 end
