@@ -21,11 +21,16 @@ Player's Cards:
 
   <br/>
 
-Player total = <%= calculate_total(session[:player_cards]) %>
+<p> <%= session[:username].capitalize %> has: <%= calculate_total(session[:player_cards]) %> </p>
 
-<form class="form-search" action="player_hit" method="post">
-  <button type="submit" class="btn" name="hit">Hit</button>
-</form>
-<form class="form-search" action="player_stay" method="post">
-    <button type="submit" class="btn" name ="stay">Stay</button>
-</form>
+What would you like to do?
+<br/>
+
+<p>
+  <form id="hit" action="/player_hit" method="post">
+    <input type="submit" class="btn btn-warning" value="Hit">
+  </form>
+  <form id="stay" action="/player_stay" method="post">
+    <input type="submit" class="btn btn-success" value="Stay">
+  </form>
+</p>
