@@ -18,3 +18,14 @@ Player's Cards:
        <li> <%= card.to_s %> </li>
     <% end %>
   </ul>
+
+  <br/>
+
+Player total = <%= calculate_total(session[:player_cards]) %>
+
+<form class="form-search" action="player_hit" method="post">
+  <button type="submit" class="btn" name="hit">Hit</button>
+</form>
+<form class="form-search" action="player_stay" method="post">
+    <button type="submit" class="btn" name ="stay">Stay</button>
+</form>
