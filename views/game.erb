@@ -1,7 +1,20 @@
-<h3><%= "Hello #{session[:username].capitalize}!
-<br/>
-Welcome to Blackjack." %></h3>
-<br/>
-<form class="form-search" action="game" method="get">
-  <button type="submit" class="btn">Start the game !</button>
-</form>
+<h1> Welcome to Blackjack </h1>
+<p>
+  Hello <%="#{session[:username].capitalize}!" %>
+</p>
+
+Dealer's Cards:
+  <ul>
+    <% session[:dealer_cards].each do |card| %>
+       <li> <%= card.to_s %> </li>
+    <% end %>
+  </ul>
+
+</br>
+
+Player's Cards:
+  <ul>
+    <% session[:player_cards].each do |card| %>
+       <li> <%= card.to_s %> </li>
+    <% end %>
+  </ul>
