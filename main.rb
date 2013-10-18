@@ -30,6 +30,10 @@ helpers do
 end
 
 
+before do
+  @show_hit_or_stay_buttons = true
+end
+
 get '/' do
   if session[:username]
     redirect '/game'
@@ -64,10 +68,19 @@ get '/game' do
   erb :game
 end
 
-post '/player_turn' do
-  if params[:hit]
-    "You Hit"
-  else
-    "You Stayed"
+post '/game/player/hit' do
+  session[:player_cards] << session[:deck].pop 
+  if calculate_total(session[:player_cards]) > 21
+    @error = "You busted!"
+    @show_hit_or_stay_buttons = false
+  elsif calculate_total(session[:player_cards]) == 21
+    @sucess = "Blackjack! Congratulations #{session[:player_name]}, you win!"
   end
+  erb :game
+end
+
+post '/game/player/stay' do
+  @success = "You have chosen to stay #{session[:player_name]}."
+  @show_hit_or_stay_buttons = false
+  erb :game
 end
