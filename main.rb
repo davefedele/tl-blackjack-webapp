@@ -70,6 +70,11 @@ get '/username' do
 end
 
 post '/username' do
+  if params[:username].empty?
+    @error = "A name is required."
+    halt erb(:username)
+  end
+
   session[:username] = params[:username]
   redirect '/game'
 end
@@ -77,7 +82,7 @@ end
 get '/game' do
   # deck 
   suits = ['H', 'D', 'C', 'S']
-  values = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+  values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
   session[:deck] = suits.product(values).shuffle! # cards is [['D', '4'], ['H', 'A'] ...]
 
   session[:dealer_cards] = []
@@ -93,17 +98,21 @@ end
 
 post '/game/player/hit' do
   session[:player_cards] << session[:deck].pop 
-  if calculate_total(session[:player_cards]) > 21
-    @error = "You busted!"
-    @show_hit_or_stay_buttons = false
-  elsif calculate_total(session[:player_cards]) == 21
-    @sucess = "Blackjack! Congratulations #{session[:player_name]}, you win!"
+  
+  player_total = calculate_total(session[:player_cards])
+
+  if player_total == 21
+    @success = "Blackjack! Congratulations #{session[:username]} hit blackjack!" 
+    @show_hit_or_stay_buttons = false 
+  elsif player_total > 21
+    @error = "Sorry, #{session[:username]} busted!"
+    @show_hit_or_stay_buttons = false 
   end
   erb :game
 end
 
 post '/game/player/stay' do
-  @success = "You have chosen to stay #{session[:player_name]}."
+  @success = "#{session[:username]} has chosen to stay."
   @show_hit_or_stay_buttons = false
   erb :game
 end

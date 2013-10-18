@@ -1,6 +1,6 @@
 <h1> Welcome to Blackjack </h1>
 <p>
-  Hello <%="#{session[:username].capitalize}!" %>
+  Hello <%="#{session[:username]}!" %>
 </p>
 
 <div class="well">
@@ -24,9 +24,9 @@
 
   <br/>
 
-<p> <%= session[:username].capitalize %> has: <%= calculate_total(session[:player_cards]) %>
+<p> <%= session[:username] %> has: <%= calculate_total(session[:player_cards]) %>.
 
-What would you like to do?
+What would <%= session[:username] %> like to do?
 <br/>
 
 <% if @show_hit_or_stay_buttons %>
