@@ -3,21 +3,24 @@
   Hello <%="#{session[:username].capitalize}!" %>
 </p>
 
-Dealer's Cards:
-  <ul>
-    <% session[:dealer_cards].each do |card| %>
-       <li> <%= card.to_s %> </li>
-    <% end %>
-  </ul>
+<div class="well">
+  <h4>Dealer's Cards:</h4>
+    <ul>
+      <% session[:dealer_cards].each do |card| %>
+         <%= card_image(card) %>
+      <% end %>
+    </ul>
+</div
 
 </br>
-
-Player's Cards:
-  <ul>
-    <% session[:player_cards].each do |card| %>
-       <li> <%= card.to_s %> </li>
-    <% end %>
-  </ul>
+<div class="well">
+  <h4>Player's Cards:</h4>
+    <ul>
+      <% session[:player_cards].each do |card| %>
+         <%= card_image(card) %>
+      <% end %>
+    </ul>
+</div>
 
   <br/>
 
@@ -27,10 +30,10 @@ What would you like to do?
 <br/>
 
 <% if @show_hit_or_stay_buttons %>
-  <form action="/game/player/hit" method="post">
+  <form id="hit_form" action="/game/player/hit" method="post">
     <input type="submit" class="btn btn-warning" value="Hit" />
   </form>
-  <form action="/game/player/stay" method="post">
+  <form id="stay_form" action="/game/player/stay" method="post">
     <input type="submit" class="btn btn-success" value="Stay"/>
   </form>
 <% end %>
