@@ -6,6 +6,7 @@ set :sessions, true
 BLACKJACK_AMOUNT = 21
 DEALER_MIN_HIT = 17
 INITIAL_POT_AMOUNT = 500
+BLACKJACK_PAYOUT_AMOUNT = 1.5
 
 helpers do
 
@@ -61,7 +62,7 @@ helpers do
     player_total = calculate_total(session[:player_cards])
   
     if player_total == BLACKJACK_AMOUNT
-      session[:player_pot] = session[:player_pot] + (session[:player_bet] * 1.5)
+      session[:player_pot] = session[:player_pot] + (session[:player_bet] * BLACKJACK_PAYOUT_AMOUNT)
     else
       session[:player_pot] = session[:player_pot] + session[:player_bet]
     end
