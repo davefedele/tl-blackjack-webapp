@@ -113,7 +113,6 @@ post '/username' do
 end
 
 get '/bet' do
-  puts session[:player_pot]
   if session[:player_pot] == 0
     halt erb :game_over
   end
