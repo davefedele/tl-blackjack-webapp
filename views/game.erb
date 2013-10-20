@@ -47,7 +47,9 @@
 
 <p> <%= session[:username] %> has: <%= calculate_total(session[:player_cards]) %>.
 
-What would <%= session[:username] %> like to do?
+<% if @show_hit_or_stay_buttons %>
+  What would <%= session[:username] %> like to do?
+<% end %>
 <br/>
 
 <% if @show_hit_or_stay_buttons %>
