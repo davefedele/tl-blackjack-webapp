@@ -87,6 +87,7 @@ end
 
 before do
   @show_hit_or_stay_buttons = true
+  session[:new_bet] = false
 end
 
 get '/' do
@@ -122,13 +123,14 @@ end
 
 post '/bet' do
   if params[:bet_amount].nil? || params[:bet_amount].to_i == 0 #all values from forms come in as string... to_i important
-    @error = "You Must make a bet"
+    @error = "You must make a bet"
     halt erb :bet
   elsif params[:bet_amount].to_i > session[:player_pot]
     @error = "Bet amount can't exceed what you have ($#{session[:player_pot]})"
     halt erb  :bet
   else
     session[:player_bet] = params[:bet_amount].to_i   
+    session[:new_bet] = true
     redirect '/game'
   end
 end
@@ -209,6 +211,8 @@ get '/game/compare' do
   else
     tie!("Both #{session[:username]} and the dealer stayed at {player_total}.")
   end
+
+  session[:skip_pot_update] = true
 
   erb :game, layout: false
 end

@@ -17,9 +17,20 @@
       }
       .sidebar-nav {
         padding: 9px 0;
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
       }
 
     </style>
+    
+    <link href="/vendor/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
   </head>
 
   <body style="padding-top: 50px;">
@@ -53,10 +64,11 @@
           <img src="/images/blackjack.jpg"/>
           <div class="well sidebar-nav" >
             <ul class="nav nav-list">
-              <li class="nav-header">This round's bet: </li>
-              <li><a href="">Dealer Total: </a></li>
-              <li><a href="">Player Total: </a></li>
-              <li><a href="">Player Pot: </a></li>
+              <li class="nav-header" id="round_bet_sidebar"><strong> This round's bet: </strong></li>
+              <li><a href="" id="player_pot_sidebar">Player Pot: 500 </a></li>
+              <li><a href="" ></a></li>
+              <li><a href="" id="games_won_sidebar">Games Won: </a></li>
+              <li><a href="" id="games_lost_sidebar">Games Lost: </a></li>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->

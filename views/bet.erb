@@ -1,6 +1,6 @@
 <h3> Make a bet for this round.</h3>
 <p> <%= session[:username]%> has $<%= session[:player_pot].to_i %> </p>
-
+<script> document.getElementById('player_pot_sidebar').innerHTML ='Player Pot: <%= session[:player_pot] %>'; </script>
 <form action='/bet' method='post'> 
   <input type="text" name="bet_amount"/>
   <br/>

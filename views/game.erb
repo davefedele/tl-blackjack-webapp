@@ -1,6 +1,14 @@
 <div id="game">
   <h3> Let's play some Blackjack <%="#{session[:username]}!" %> </h3>
 
+  <% puts "session skip pot update: #{session[:skip_pot_update]}" %>
+  <% unless session[:skip_pot_update] == true %>
+    <script> document.getElementById('player_pot_sidebar').innerHTML ='Player Pot: <%= session[:player_pot] - session[:player_bet] %>'; </script>
+  <% end %>
+  
+
+  <script> document.getElementById('round_bet_sidebar').innerHTML ='<strong>This round\'s bet: <%= session[:player_bet] %></strong>'; </script>
+
   <%if @loser %>
     <div class="alert alert-error"><%=@loser%></div>
     <% end %>
@@ -17,7 +25,7 @@
   <% end %>
 
   <div class="well" id="dealer_cards">
-    <h4>Dealer's Cards:</h4>
+    <h4>Dealer's Cards: <%= calculate_total(session[:dealer_cards])%></h4>
         <% session[:dealer_cards].each_with_index do |card,index| %>
           <% if session[:turn] != "dealer" && index == 0 %> 
             <img src='/images/cards/cover.jpg' class='card_image'>
@@ -38,20 +46,19 @@
 
   </br>
   <div class="well" id="player_cards">
-    <h4>Player's Cards:</h4>
+    <h4>Player's Cards: <%= calculate_total(session[:player_cards])%></h4>
         <% session[:player_cards].each do |card| %>
            <%= card_image(card) %>
         <% end %>
 
-        <h5> 
+        <!--<h5> 
           <%= session[:username] %> has $<%= session[:player_pot] %> and bet $<%= session[:player_bet] %> this round.
-        </h5>
+        </h5>-->
   </div>
 
     <br/>
 
-  <p> <%= session[:username] %> has: <%= calculate_total(session[:player_cards]) %>.
-
+  <!-- <p> <%= session[:username] %> has: <%= calculate_total(session[:player_cards]) %>. -->
   <% if @show_hit_or_stay_buttons %>
     What would <%= session[:username] %> like to do?
   <% end %>
