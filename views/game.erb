@@ -1,11 +1,8 @@
 <div id="game">
-  <h1> Welcome to Blackjack </h1>
-  <p>
-    Hello <%="#{session[:username]}!" %>
-  </p>
+  <h3> Let's play some Blackjack <%="#{session[:username]}!" %> </h3>
 
   <%if @loser %>
-      <div class="alert alert-error"><%=@loser%></div>
+    <div class="alert alert-error"><%=@loser%></div>
     <% end %>
     <%if @winner %>
       <div class="alert alert-success"><%=@winner%></div>
@@ -23,7 +20,7 @@
     <h4>Dealer's Cards:</h4>
         <% session[:dealer_cards].each_with_index do |card,index| %>
           <% if session[:turn] != "dealer" && index == 0 %> 
-            <img src='/images/cards/cover.jpg'>
+            <img src='/images/cards/cover.jpg' class='card_image'>
           <% else %>
             <%= card_image(card) %>
           <% end %>
