@@ -96,7 +96,7 @@ get '/' do
   if session[:username]
     redirect '/game'
   else
-    erb :username
+    redirect '/username'
   end
 end
 
