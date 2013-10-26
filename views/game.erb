@@ -1,13 +1,16 @@
 <div id="game">
   <h3> Let's play some Blackjack <%="#{session[:username]}!" %> </h3>
 
-  <% puts "session skip pot update: #{session[:skip_pot_update]}" %>
   <% unless session[:skip_pot_update] == true %>
     <script> document.getElementById('player_pot_sidebar').innerHTML ='Player Pot: <%= session[:player_pot] - session[:player_bet] %>'; </script>
   <% end %>
   
 
-  <script> document.getElementById('round_bet_sidebar').innerHTML ='<strong>This round\'s bet: <%= session[:player_bet] %></strong>'; </script>
+  <script> document.getElementById('round_bet_sidebar').innerHTML ='<h5><strong>This round\'s bet: <%= session[:player_bet] %></strong></h5>'; </script>
+
+  <script> document.getElementById('games_won_sidebar').innerHTML ='Games Won: <%= session[:games_won] %>'; </script>
+
+  <script> document.getElementById('games_lost_sidebar').innerHTML ='Games Lost: <%= session[:games_lost] %>'; </script>
 
   <%if @loser %>
     <div class="alert alert-error"><%=@loser%></div>

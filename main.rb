@@ -67,6 +67,7 @@ helpers do
       session[:player_pot] = session[:player_pot] + session[:player_bet]
     end
     @winner = "<strong> #{session[:username]} wins! </strong> #{msg}"
+    session[:games_won] += 1
   end
 
   def loser!(msg)
@@ -74,6 +75,7 @@ helpers do
     @play_again = true
     session[:player_pot] = session[:player_pot] - session[:player_bet]
     @loser = "<strong> #{session[:username]} loses! </strong> #{msg}"
+    session[:games_lost] += 1
   end 
 
   def tie(msg)
@@ -100,6 +102,8 @@ end
 
 get '/username' do
   session[:player_pot] = INITIAL_POT_AMOUNT
+  session[:games_won] = 0
+  session[:games_lost] = 0 
   erb :username
 end
 
@@ -149,6 +153,11 @@ get '/game' do
   2.times do
     session[:dealer_cards] << session[:deck].pop 
     session[:player_cards] << session[:deck].pop 
+  end
+
+  player_total = calculate_total(session[:player_cards])
+  if player_total == BLACKJACK_AMOUNT
+    winner!("#{session[:username]} hit blackjack!")
   end
 
   erb :game

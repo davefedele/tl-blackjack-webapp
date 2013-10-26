@@ -1,8 +1,14 @@
 <h3> Make a bet for this round.</h3>
 <p> <%= session[:username]%> has $<%= session[:player_pot].to_i %> </p>
-<script> document.getElementById('player_pot_sidebar').innerHTML ='Player Pot: <%= session[:player_pot] %>'; </script>
+
 <form action='/bet' method='post'> 
   <input type="text" name="bet_amount"/>
   <br/>
   <input type="submit" value="Make a bet" class="button"/>
 </form>
+
+<script> document.getElementById('player_pot_sidebar').innerHTML ='Player Pot: <%= session[:player_pot] %>'; </script>
+
+<script> document.getElementById('games_won_sidebar').innerHTML ='Games Won: <%= session[:games_won] %>'; </script>
+
+<script> document.getElementById('games_lost_sidebar').innerHTML ='Games Lost: <%= session[:games_lost] %>'; </script>
