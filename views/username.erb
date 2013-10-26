@@ -3,3 +3,9 @@
   <input type="text" class="input-medium search-query" name="username">
   <button type="submit" class="btn">Let's Begin!</button>
 </form>
+
+<script> document.getElementById('player_pot_sidebar').innerHTML ='Player Pot: <%= session[:player_pot] %>'; </script>
+
+<script> document.getElementById('games_won_sidebar').innerHTML ='Games Won: <%= session[:games_won] %>'; </script>
+
+<script> document.getElementById('games_lost_sidebar').innerHTML ='Games Lost: <%= session[:games_lost] %>'; </script>
